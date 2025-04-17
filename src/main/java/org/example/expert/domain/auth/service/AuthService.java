@@ -26,13 +26,15 @@ public class AuthService {
     @Transactional
     public SignupResponse signup(SignupRequest signupRequest) {
 
+        if (userRepository.existsByEmail(signupRequest.getEmail())) {   // 비밀번호부터 가져온다면 회원가입 진행이 되지않는다. 먼저 회원가입에 필요한 이메일 부터가져온뒤에 비밀번호를 입력해야 된다고 생각된다.
+            throw new InvalidRequestException("이미 존재하는 이메일입니다.");
+        }
+
         String encodedPassword = passwordEncoder.encode(signupRequest.getPassword());
 
         UserRole userRole = UserRole.of(signupRequest.getUserRole());
 
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            throw new InvalidRequestException("이미 존재하는 이메일입니다.");
-        }
+
 
         User newUser = new User(
                 signupRequest.getEmail(),
