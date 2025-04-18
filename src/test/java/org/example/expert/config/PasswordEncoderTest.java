@@ -16,13 +16,13 @@ class PasswordEncoderTest {
     @Test
     void matches_메서드가_정상적으로_동작한다() {
         // given
-        String rawPassword = "testPassword";
-        String encodedPassword = passwordEncoder.encode(rawPassword);
+        String rawPassword = "testPassword"; // 사용자의 기존 비밀번호
+        String encodedPassword = passwordEncoder.encode(rawPassword); // 암호화된 비밀번호
 
         // when
         boolean matches = passwordEncoder.matches(encodedPassword, rawPassword);
 
         // then
-        assertTrue(matches);
+        assertTrue(matches); // 매칭된다면 메서드가 정상적으로 동작된다는 문구가 나타난다.
     }
 }
