@@ -20,7 +20,7 @@ class PasswordEncoderTest {
         String encodedPassword = passwordEncoder.encode(rawPassword); // 암호화된 비밀번호
 
         // when
-        boolean matches = passwordEncoder.matches(encodedPassword, rawPassword);
+        boolean matches = passwordEncoder.matches(rawPassword, encodedPassword); // 기존의 비밀번호가 먼저 실행되어야한다.
 
         // then
         assertTrue(matches); // 매칭된다면 메서드가 정상적으로 동작된다는 문구가 나타난다.
